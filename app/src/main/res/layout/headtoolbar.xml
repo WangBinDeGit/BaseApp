@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:minHeight="@dimen/dp_56"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/img_head_left"
+        android:layout_width="@dimen/dp_56"
+        android:layout_height="@dimen/dp_56"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
+            android:contentDescription="@string/cancle"
+            android:src="@mipmap/icon_return" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_head_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:singleLine="true"
+        android:textColor="@color/textcolor3"
+        android:textSize="@dimen/textbig17"
+        tools:ignore="RelativeOverlap" />
+
+    <TextView
+        android:id="@+id/tv_head_right"
+        android:layout_width="@dimen/dp_56"
+        android:layout_height="@dimen/dp_56"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textColor="@color/textcolor3"
+        android:textSize="@dimen/textsmall"
+        tools:ignore="RtlHardcoded" />
+
+    <TextView
+        android:id="@+id/tv_head_add"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_56"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dp_16"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textColor="@color/textcolor3"
+        android:textSize="@dimen/textsmall"
+        tools:ignore="RelativeOverlap,RtlHardcoded" />
+
+    <ImageView
+        android:id="@+id/img_head_right"
+        android:layout_width="@dimen/dp_56"
+        android:layout_height="@dimen/dp_56"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:layout_marginRight="@dimen/dp_16"
+        android:contentDescription="@string/search"
+        android:scaleType="center"
+        android:src="@mipmap/icon_select"
+        android:visibility="gone" />
+
+</RelativeLayout>

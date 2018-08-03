@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="TextFields">
+
+    <include
+        android:id="@+id/photo_relativeLayout"
+        layout="@layout/headtoolbar" />
+
+    <com.wangbin.mydome.view.HackyViewPager
+        android:id="@+id/hvp_bigphoto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/photo_relativeLayout"
+        android:layout_marginBottom="@dimen/dp_4">
+
+    </com.wangbin.mydome.view.HackyViewPager>
+
+    <TextView
+        android:id="@+id/tv_bigphoto_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/photo_relativeLayout"
+        android:layout_margin="@dimen/dp_24"
+        android:textColor="@color/title_color"
+        android:textSize="@dimen/textnomal15" />
+
+</RelativeLayout>

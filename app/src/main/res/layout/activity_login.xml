@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg_login"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
+                android:background="@drawable/shape_login_input"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_23"
+                    android:layout_height="@dimen/dp_23"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:src="@mipmap/icon_login_user" />
+
+                <com.wangbin.mydome.view.ClearEditText
+                    android:id="@+id/et_login_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_28"
+                    android:layout_marginRight="@dimen/dp_23"
+                    android:layout_weight="2"
+                    android:background="@null"
+                    android:hint="请输入您的账号"
+                    android:textColor="@color/textcolor3"
+                    android:textSize="@dimen/textnomal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_25"
+                android:background="@drawable/shape_login_input"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_23"
+                    android:layout_height="@dimen/dp_23"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:src="@mipmap/icon_login_pwd" />
+
+                <com.wangbin.mydome.view.ClearEditText
+                    android:id="@+id/et_login_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_28"
+                    android:layout_marginRight="@dimen/dp_23"
+                    android:layout_weight="2"
+                    android:background="@null"
+                    android:hint="请输入您的密码"
+                    android:inputType="textPassword"
+                    android:textColor="@color/textcolor3"
+                    android:textSize="@dimen/textnomal" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_login_submit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_36"
+                android:background="@drawable/shapecreateok"
+                android:gravity="center"
+                android:text="@string/login"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textbig17" />
+
+            <RelativeLayout
+                android:id="@+id/lin_login_forgetpw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_8">
+
+                <CheckBox
+                    android:id="@+id/cb_remember"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/radio_button_style"
+                    android:checked="true"
+                    android:paddingLeft="@dimen/dp_5"
+                    android:text="@string/remember_pwd"
+                    android:textColor="@color/textcolor6"
+                    android:textSize="@dimen/textsmall13" />
+
+                <TextView
+                    android:id="@+id/tv_forget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/forgetpassword"
+                    android:textColor="@color/textcolor6"
+                    android:textSize="@dimen/textsmall13" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom|center_horizontal"
+            android:paddingBottom="@dimen/dp_8"
+            android:paddingTop="@dimen/dp_90"
+            android:text="@string/company"
+            android:textColor="@color/textcolor6"
+            android:textSize="@dimen/textlittle" />
+    </LinearLayout>
+
+</RelativeLayout>

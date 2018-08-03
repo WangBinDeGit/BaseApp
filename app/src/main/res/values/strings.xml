@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">今日头条</string>
+    <string name="company">海誉集团经纪有限公司</string>
+    <string name="saveuserpass">记住密码</string>
+    <string name="isoffline">离线</string>
+    <string name="logintitle">登  录</string>
+    <string name="logintext1">今日头条</string>
+    <string name="logintext2">欢迎登录</string>
+    <string name="logindefault1">请输入您的账号</string>
+    <string name="logindefault2">请输入您的密码</string>
+    <string name="login_success">登录成功</string>
+    <string name="login">登 录</string>
+    <string name="no">员工编号</string>
+    <string name="please_input">请输入</string>
+    <string name="id_card">身份证号</string>
+    <string name="mobile_phone">手机号</string>
+    <string name="forget_pwd_title">忘记密码</string>
+    <string name="set_pwd">设置密码</string>
+    <string name="confirm">确定</string>
+    <string name="cancle">取消</string>
+    <string name="forgetpassword">忘记密码？</string>
+    <string name="remember_pwd">记住密码</string>
+    <string name="search">搜索</string>
+    <string name="photo_title">图片详情</string>
+
+    <string name="btn">加载中...</string>
+    <string name="filebtn">上传中...</string>
+</resources>

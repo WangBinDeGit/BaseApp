@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".activity.layout_toutiao">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <!-- 显示题目 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_65"
+            android:text="登录你的头条，精彩永不丢失"
+            android:textColor="#000000"
+            android:textSize="@dimen/sp_22" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_25"
+            android:layout_marginRight="@dimen/dp_25"
+            android:layout_marginTop="@dimen/dp_60"
+            android:background="@drawable/shape"
+            android:orientation="horizontal">
+
+            <!-- 手机号输入 -->
+            <EditText
+                android:id="@+id/mobil_login"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:layout_alignEnd="@+id/coad_line"
+                android:layout_alignParentTop="true"
+                android:layout_alignRight="@+id/coad_line"
+                android:background="@null"
+                android:hint="请输入手机号"
+                android:inputType="number"
+                android:maxLength="11"
+                android:paddingLeft="@dimen/dp_20"
+                android:paddingRight="@dimen/dp_20"
+                android:textColor="#000000" />
+
+            <!-- 小竖线 -->
+            <View
+                android:id="@+id/coad_line"
+                android:layout_width="@dimen/dp_1"
+                android:layout_height="@dimen/dp_20"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_5"
+                android:layout_toLeftOf="@+id/sendcode"
+                android:background="@color/gary" />
+
+            <!-- 发送验证码 -->
+            <TextView
+                android:id="@+id/sendcode"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp_5"
+                android:gravity="center"
+                android:text="发送验证码" />
+
+        </RelativeLayout>
+
+        <!-- 验证码输入框以及提示 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_25"
+            android:layout_marginRight="@dimen/dp_25"
+            android:layout_marginTop="@dimen/dp_25"
+            android:background="@drawable/shape"
+            android:orientation="horizontal">
+
+            <!-- 验证码输入 -->
+            <EditText
+                android:id="@+id/yanzhengma"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:background="@null"
+                android:hint="请输入验证码"
+                android:inputType="number"
+                android:maxLength="6"
+                android:paddingLeft="@dimen/dp_20"
+                android:paddingRight="@dimen/dp_20"
+                android:textColor="#000000" />
+
+        </LinearLayout>
+
+
+        <!-- 登录头条按钮 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_25"
+            android:layout_marginRight="@dimen/dp_25"
+            android:layout_marginTop="@dimen/dp_60"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dp_50"
+                android:background="@drawable/btnshape"
+                android:text="进 入 头 条"
+                android:textColor="@color/white1"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <!-- 用户协议和隐私政策 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="点击查看"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="“用户协议”"
+                android:textColor="#0000ff"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="和"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="“隐私政策”"
+                android:textColor="#0000ff"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <!-- 账号注册或者密码登录 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="账号注册"
+                android:textColor="#0000ff"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:text="|"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="密码登录"
+                android:textColor="#0000ff"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <!-- 下方微信、QQ、短信、天翼的LOGO -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_60"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/dp_100"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginRight="@dimen/dp_8"
+                android:src="@mipmap/logo_one" />
+
+            <ImageView
+                android:layout_width="@dimen/dp_100"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:src="@mipmap/logo_two" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

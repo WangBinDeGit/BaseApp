@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_house"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_80"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_20"
+        android:singleLine="true"
+        android:textColor="@color/textcolor3"
+        android:textSize="@dimen/textsmall13"
+        tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/linee" />
+</LinearLayout>
