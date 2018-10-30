@@ -8,13 +8,14 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.CheckBox
 import android.widget.TextView
-import com.wangbin.mydome.impl.LoginImpl
-import com.wangbin.mydome.tools.PreferencesUtils
 import com.wangbin.mydome.Constant.Companion.constant
 import com.wangbin.mydome.R
 import com.wangbin.mydome.base.BaseActivity
 import com.wangbin.mydome.bean.LoginModel
+import com.wangbin.mydome.impl.LoginImpl
 import com.wangbin.mydome.presenter.LoginPresenter
+import com.wangbin.mydome.presenter.LoginPresenterinterface
+import com.wangbin.mydome.tools.PreferencesUtils
 import com.wangbin.mydome.view.ClearEditText
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -22,6 +23,8 @@ import kotlinx.android.synthetic.main.activity_login.*
  * 登录
  */
 class LoginActivity : BaseActivity(), LoginImpl {
+
+    private var loginPersenter: LoginPresenterinterface? = null
 
     override fun initParams(arguments: Bundle?) {
     }
@@ -37,6 +40,7 @@ class LoginActivity : BaseActivity(), LoginImpl {
         if (findViewById<CheckBox>(R.id.cb_remember).isChecked) {
             findViewById<ClearEditText>(R.id.et_login_password).setText(PreferencesUtils.getString(this, constant.USER_PWD))
         }
+        loginPersenter = LoginPresenter(this, this)
     }
 
     override fun setListener() {
@@ -62,7 +66,7 @@ class LoginActivity : BaseActivity(), LoginImpl {
                 } else {
                     PreferencesUtils.putString(this, constant.USER_PWD, "")
                 }
-                LoginPresenter(this, this).login(getText(et_login_user), getText(et_login_password))
+                loginPersenter!!.login(getText(et_login_user), getText(et_login_password))
             }
             R.id.cb_remember -> {
 

@@ -15,8 +15,9 @@ import io.reactivex.schedulers.Schedulers
 /***
  * 登录
  */
-class LoginPresenter(val impl: LoginImpl, val context: Context) {
+class LoginPresenter(val impl: LoginImpl, val context: Context):LoginPresenterinterface {
 
+    override
     fun login(userName: String, pwd: String) {
         val token = AesUtils.encrypt("$userName-$pwd", "utf-8", Constant.constant.KEY, Constant.constant.IV)
         PreferencesUtils.putString(context, Constant.constant.ACCESS_TOKEN_LOGIN, token)
