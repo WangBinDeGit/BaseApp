@@ -16,10 +16,13 @@ import android.widget.AutoCompleteTextView
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-
+import com.jakewharton.rxbinding2.view.RxView
 import com.wangbin.mydome.interfaces.IViewSpecification
 import com.wangbin.mydome.tools.AppActivityStack
 import com.wangbin.mydome.tools.LoadingDialog
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by  wangbin.
@@ -54,12 +57,14 @@ abstract class BaseActivity : AppCompatActivity(), IViewSpecification, View.OnCl
             initParams(intent.extras)
         }
         AppActivityStack.create().addActivity(this)
-
         //设置布局
         setContentView(intiLayout())
         //初始化控件
         initView()
         setListener()
+    }
+
+    open fun initParams(arguments: Bundle?) {
     }
 
     /**
@@ -86,15 +91,7 @@ abstract class BaseActivity : AppCompatActivity(), IViewSpecification, View.OnCl
      * @param msg
      */
     fun toastLong(msg: String) {
-        if (null == toast) {
-            toast = Toast(this)
-            toast!!.duration = Toast.LENGTH_LONG
-            toast!!.setText(msg)
-            toast!!.show()
-        } else {
-            toast!!.setText(msg)
-            toast!!.show()
-        }
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
     }
 
     /**
@@ -103,15 +100,7 @@ abstract class BaseActivity : AppCompatActivity(), IViewSpecification, View.OnCl
      * @param msg
      */
     fun toastShort(msg: String) {
-        if (null == toast) {
-            toast = Toast(this)
-            toast!!.duration = Toast.LENGTH_SHORT
-            toast!!.setText(msg)
-            toast!!.show()
-        } else {
-            toast!!.setText(msg)
-            toast!!.show()
-        }
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
     /**
@@ -121,6 +110,26 @@ abstract class BaseActivity : AppCompatActivity(), IViewSpecification, View.OnCl
      */
     fun onClickView(view: View) {
         view.setOnClickListener(this)
+    }
+
+    fun notFastClick(view: View) {
+        RxView.clicks(view)
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .subscribe(object : Observer<Any> {
+                    override fun onComplete() {
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+                    }
+
+                    override fun onError(e: Throwable) {
+                    }
+
+                    override fun onNext(o: Any) {
+                        onClick(view)
+                    }
+                })
+
     }
 
     override fun onClick(view: View) {
@@ -232,11 +241,6 @@ abstract class BaseActivity : AppCompatActivity(), IViewSpecification, View.OnCl
         super.onDestroy()
         //在onDestroy添加，防止空指针或者内存泄漏
         AppActivityStack.create().removeActivity(this)
-    }
-
-    companion object {
-        /***封装toast对象 */
-        private var toast: Toast? = null
     }
 
 }

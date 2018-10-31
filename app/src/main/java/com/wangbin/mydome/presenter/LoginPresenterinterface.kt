@@ -5,5 +5,5 @@ package com.wangbin.mydome.presenter
  * on 2018/10/30
  */
 interface LoginPresenterinterface {
-    fun login(userName: String, pwd: String);
+    fun login(userName: String, pwd: String,checked:Boolean)
 }

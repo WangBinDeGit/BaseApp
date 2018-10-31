@@ -1,6 +1,7 @@
 package com.wangbin.mydome.net
 
 import com.wangbin.mydome.bean.LoginModel
+import com.wangbin.mydome.bean.ResultModel
 import io.reactivex.Observable
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -13,8 +14,10 @@ import retrofit2.http.Query
 interface ApiService {
 
     //登录
-    @POST("v1/login")
-    fun login(): Observable<LoginModel>
+    @POST("login/loginByName")
+    @FormUrlEncoded
+    fun login(@Field("userName") userName: String,
+              @Field("passWord") passWord: String): Observable<ResultModel>
 
     //首页
     @POST("v1/index")

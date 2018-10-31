@@ -11,6 +11,7 @@ import com.qiniu.android.storage.UpProgressHandler
 import com.qiniu.android.storage.UploadManager
 import com.qiniu.android.storage.UploadOptions
 import com.qiniu.android.utils.UrlSafeBase64
+import com.wangbin.mydome.MyApplication.Companion.instance
 import com.wangbin.mydome.bean.UpdatePictureBean
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -80,7 +81,7 @@ object QiNiuUtils {
                                 }
                                 handler!!.sendMessage(msg)
                             } else {
-                                ToastUtils.showShortToast(MyApplication.instance()!!.applicationContext, "上传失败")
+                                ToastUtils.showShortToast(instance.applicationContext, "上传失败")
                             }
                         }
                     }, UploadOptions(null, null, false,

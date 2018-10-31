@@ -88,7 +88,6 @@ class BigPhotoActivity : BaseActivity() {
             return listViews.size
         }
 
-
         override fun instantiateItem(container: ViewGroup, position: Int): View {
             val photoView = PhotoView(container.context)
             val lp = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT)
@@ -113,6 +112,5 @@ class BigPhotoActivity : BaseActivity() {
         }
 
     }
-
 
 }

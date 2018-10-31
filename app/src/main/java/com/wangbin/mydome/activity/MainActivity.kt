@@ -1,46 +1,49 @@
 package com.wangbin.mydome.activity
 
-import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.MenuItem
 import android.view.View
-import android.widget.EditText
 import android.widget.ImageView
-
+import com.vector.update_app_kotlin.updateApp
 import com.wangbin.mydome.R
 import com.wangbin.mydome.adapter.SearchAdapter
 import com.wangbin.mydome.adapter.ViewPagerAdapter
+import com.wangbin.mydome.base.BaseActivity
 import com.wangbin.mydome.bean.SearchBean
 import com.wangbin.mydome.fragment.NewsFragment
 import com.wangbin.mydome.fragment.TestFragment
 import com.wangbin.mydome.helper.BottomNavigationViewHelper
-
-import java.util.ArrayList
+import com.wangbin.mydome.net.UpdateAppHttpUtil
+import com.wangbin.mydome.net.Url
+import com.wangbin.mydome.net.Url.Companion.url
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.nav_header_main.*
+import java.util.*
 
 
 /**
  * 主界面
  */
-class MainActivity : AppCompatActivity() {
-    private var bottomNavigationView: BottomNavigationView? = null
-    private var nav_view: NavigationView? = null
-    private var drawer_layout: DrawerLayout? = null
-    private var rec_search: RecyclerView? = null
-    private var et_search: EditText? = null
-    private var img_search: ImageView? = null
+class MainActivity : BaseActivity() {
+
     private var viewPagerAdapter: ViewPagerAdapter? = null
     private var searchAdapter: SearchAdapter? = null
-    private var viewPager: ViewPager? = null
     private var menuItem: MenuItem? = null
     private var num = 1
-    private val datas = ArrayList<SearchBean>()
+    private val mDatas = ArrayList<SearchBean>()
+    private var titles: Array<String>? = null
+    private var imgSearch:ImageView ?=null
+
+    override fun intiLayout(): Int {
+        return R.layout.activity_main
+    }
+
+    override fun widgetClick(view: View) {
+    }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         menuItem = item
@@ -65,18 +68,11 @@ class MainActivity : AppCompatActivity() {
         false
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        initView()
-        initLinster()
-    }
-
-    private fun initView() {
-        bottomNavigationView = findViewById(R.id.bottomNavigationView)
+    override fun initView() {
+        titles = arrayOf(resources.getString(R.string.title1), resources.getString(R.string.title2),
+                resources.getString(R.string.title3), resources.getString(R.string.title3))
         bottomNavigationView!!.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView!!)
-        viewPager = findViewById(R.id.vp)
         viewPager!!.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 
@@ -99,46 +95,44 @@ class MainActivity : AppCompatActivity() {
         viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
         viewPager!!.adapter = viewPagerAdapter
         val list = ArrayList<Fragment>()
-        list.add(NewsFragment.newInstance("首页"))
-        list.add(NewsFragment.newInstance("公告"))
-        list.add(TestFragment.newInstance("趣闻"))
-        list.add(TestFragment.newInstance("个人"))
+        list.add(NewsFragment.newInstance(titles!![0]))
+        list.add(NewsFragment.newInstance(titles!![1]))
+        list.add(TestFragment.newInstance(titles!![2]))
+        list.add(TestFragment.newInstance(titles!![3]))
         viewPagerAdapter!!.setList(list)
 
-        drawer_layout = findViewById(R.id.drawer_layout)
-        nav_view = findViewById(R.id.nav_view)
         val headerView = nav_view!!.getHeaderView(0)
-        rec_search = headerView.findViewById(R.id.rec_search)
-        et_search = headerView.findViewById(R.id.et_search)
-        img_search = headerView.findViewById(R.id.img_search)
+        val rec_search = headerView.findViewById<RecyclerView>(R.id.rec_search)
+        imgSearch = headerView.findViewById<ImageView>(R.id.img_search)
 
-        val layoutManager = LinearLayoutManager(this@MainActivity)
-        rec_search!!.layoutManager = layoutManager
-        searchAdapter = SearchAdapter(this@MainActivity, datas)
+        rec_search!!.layoutManager = LinearLayoutManager(this@MainActivity)
+        searchAdapter = SearchAdapter(this@MainActivity, mDatas)
         rec_search!!.adapter = searchAdapter
+        updateApp(url.BASE_URL+url.UPDATE, UpdateAppHttpUtil()).update()
     }
 
-    private fun initLinster() {
-        img_search!!.setOnClickListener {
-            datas.clear()
+    override fun setListener() {
+        imgSearch!!.setOnClickListener {
+            mDatas.clear()
             for (i in 0..4) {
                 val searchBean = SearchBean()
                 searchBean.name = "测试数据$num"
                 searchBean.isFlag = false
-                datas.add(searchBean)
+                mDatas.add(searchBean)
                 num++
             }
             searchAdapter!!.notifyDataSetChanged()
         }
 
-        searchAdapter!!.setOnItemClickLitener { view, position ->
-            for (searchBean in datas) {
-                searchBean.isFlag = false
+        searchAdapter!!.setOnItemClickLitener(object : SearchAdapter.OnItemClickListener {
+            override fun onItemClick(view: View, position: Int) {
+                for (searchBean in mDatas) {
+                    searchBean.isFlag = false
+                }
+                mDatas[position].isFlag = true
+                searchAdapter!!.notifyDataSetChanged()
             }
-            datas[position].isFlag = true
-            searchAdapter!!.notifyDataSetChanged()
-        }
-
+        })
     }
 
 }

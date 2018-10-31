@@ -25,4 +25,8 @@
 
     <string name="btn">加载中...</string>
     <string name="filebtn">上传中...</string>
+    <string name="title1">首页</string>
+    <string name="title2">公告</string>
+    <string name="title3">趣闻</string>
+    <string name="title4">个人</string>
 </resources>

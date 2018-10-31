@@ -1,9 +1,9 @@
 package com.wangbin.mydome
 
-import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.support.multidex.MultiDex
+import com.wangbin.mydome.crash.CrashHandler
 
 /**
  * Created by WangBin on 2018/4/16.
@@ -13,7 +13,7 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        instance = this
+//        CrashHandler.getInstance().init(this)
     }
 
     override fun attachBaseContext(base: Context) {
@@ -23,9 +23,7 @@ class MyApplication : Application() {
 
 
     companion object {
-        @SuppressLint("StaticFieldLeak")
-        private var instance: Application? = null
-        fun instance() = instance
+        val instance: MyApplication by lazy { MyApplication() }
     }
 
 }

@@ -10,11 +10,6 @@ import android.view.View
 interface IViewSpecification {
 
     /**
-     * 初始化Bundle参数
-     */
-    fun initParams(arguments: Bundle?)
-
-    /**
      * 设置布局
      *
      * @return

@@ -1,4 +1,4 @@
-package com.meijiamanage.net
+package com.wangbin.mydome.net
 
 import android.content.Context
 import com.google.gson.Gson
@@ -43,8 +43,6 @@ abstract class BaseObserve<T>(context: Context, isShowDialog: Boolean) : Observe
             } else
                 onSuccess(t)
         }
-
-
     }
 
     override fun onError(e: Throwable) {
@@ -52,7 +50,6 @@ abstract class BaseObserve<T>(context: Context, isShowDialog: Boolean) : Observe
         if (isShowDialog)
             DUtils.dismiss()
     }
-
 
     abstract fun onSuccess(t: T)
 

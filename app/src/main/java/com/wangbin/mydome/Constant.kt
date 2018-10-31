@@ -60,14 +60,14 @@ class Constant {
     /**
      * 存储字段
      */
-    val USER_NAME = "user_name"
-    val USER_PWD = "user_pwd"
-    val BASE_URL = "base_url"//
-    val ACCESS_TOKEN = "access_token"
-    val USER_NO = "user_no"
-    val REAL_NAME = "real_name"
-    val SEX = "sex"
-    val AREA_NAME = "area_name"
+    val USER_NAME = "user_name"//用户名
+    val USER_PWD = "user_pwd"//用户密码
+    val BASE_URL = "base_url"//基础url
+    val ACCESS_TOKEN = "access_token"//token
+    val USER_NO = "user_no"//用户编号
+    val REAL_NAME = "real_name"//真实姓名
+    val SEX = "sex"//用户性别
+    val AREA_NAME = "area_name"//用户地址
     val STORE_NAME = "store_name"
     val ROLE_NAME = "role_name"
     val TEL = "tel"//电话

@@ -242,8 +242,8 @@ final public class AppActivityStack {
                 Intent it = new Intent();
                 it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                         | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-                it.setClass(MyApplication.Companion.instance(), clsMain);
-                MyApplication.Companion.instance().startActivity(it);
+                it.setClass(MyApplication.Companion.getInstance(), clsMain);
+                MyApplication.Companion.getInstance().startActivity(it);
             }
         }
 
@@ -253,14 +253,14 @@ final public class AppActivityStack {
         finishAllActivity();
         Intent it = new Intent();
         it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-        it.setClass(MyApplication.Companion.instance(), cls);
-        MyApplication.Companion.instance().startActivity(it);
+        it.setClass(MyApplication.Companion.getInstance(), cls);
+        MyApplication.Companion.getInstance().startActivity(it);
     }
 
     public void restartApp(Class<?> cls) {
-        Intent intent = new Intent(MyApplication.Companion.instance(), cls);
+        Intent intent = new Intent(MyApplication.Companion.getInstance(), cls);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        MyApplication.Companion.instance().startActivity(intent);
+        MyApplication.Companion.getInstance().startActivity(intent);
         android.os.Process.killProcess(android.os.Process.myPid());  //结束进程之前可以把你程序的注销或者退出代码放在这段代码之前
     }
 
