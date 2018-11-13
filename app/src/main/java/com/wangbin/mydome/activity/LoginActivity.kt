@@ -1,14 +1,13 @@
 package com.wangbin.mydome.activity
 
 import android.graphics.Paint
-import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import com.wangbin.mydome.Constant.Companion.constant
 import com.wangbin.mydome.R
 import com.wangbin.mydome.base.BaseActivity
-import com.wangbin.mydome.bean.LoginModel
-import com.wangbin.mydome.bean.ResultModel
+import com.wangbin.mydome.bean.BaseEntity
+import com.wangbin.mydome.bean.UserBean
 import com.wangbin.mydome.impl.LoginImpl
 import com.wangbin.mydome.presenter.LoginPresenter
 import com.wangbin.mydome.presenter.LoginPresenterinterface
@@ -51,19 +50,19 @@ class LoginActivity : BaseActivity(), LoginImpl {
         }
     }
 
-    override fun loginSuccess(loginModel: ResultModel) {
+    override fun loginSuccess(loginModel: BaseEntity<UserBean>) {
         //保存用户信息
-        if(loginModel.errcode == 0) {
-//        PreferencesUtils.saveUser(this@LoginActivity, loginModel)
+        if (loginModel.statusCode == 200) {
+            if (loginModel.data != null) PreferencesUtils.saveUser(this@LoginActivity, loginModel.data!!)
             startActivity(MainActivity::class.java)
             finish()
-        }else{
-            toastShort(loginModel.errmsg)
+        } else {
+            toastShort(loginModel.message)
         }
     }
 
-    override fun loginFail(loginModel: ResultModel) {
-        toastShort(loginModel.errmsg!!)
+    override fun loginFail(loginModel: BaseEntity<UserBean>) {
+        toastShort(loginModel.message)
     }
 
 }

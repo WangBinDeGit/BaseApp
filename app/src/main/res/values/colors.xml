@@ -11,8 +11,8 @@
     <color name="shapline">#BABFC0</color>
     <color name="trans">#80ffffff</color>
     <color name="selected_search">#B8E2E1</color>
-    <color name="colorPrimary">#D4D4D4</color>
-    <color name="colorPrimaryDark">#D4D4D4</color>
+    <color name="colorPrimary">#0057E4</color>
+    <color name="colorPrimaryDark">#0057E4</color>
     <color name="colorAccent">#FF4081</color>
     <color name="title_color">#f5f5f5</color>
     <color name="background">#f5f5f5</color>

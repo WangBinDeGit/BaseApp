@@ -22,8 +22,6 @@ class LogInterceptor : Interceptor {
             val url = request.url().toString()
             val headers = request.headers()
 
-            Log.d(Constant.constant.TAG, "url : $url")
-            Log.d(Constant.constant.TAG, "method : " + request.method())
             if (headers != null && headers.size() > 0) {
                 Log.e(Constant.constant.TAG, "headers : " + headers.toString())
             }

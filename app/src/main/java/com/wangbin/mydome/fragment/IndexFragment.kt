@@ -5,40 +5,36 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import android.widget.TextView
 import com.wangbin.mydome.R
-import kotlinx.android.synthetic.main.fragment_index.*
-import kotlinx.android.synthetic.main.fragment_news.*
 
 /**
- * Created by wangbin
- * on 2018/7/16.
+ * Created by jxd.
+ * on 2018/11/2
  */
-
-class NewsFragment : Fragment() {
+class IndexFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_news, container, false)
-        initView(view)
-        return view
+        return inflater.inflate(R.layout.fragment_index, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bundle = arguments
-        bundle?.getString("name")
-    }
+        val tv = view.findViewById<TextView>(R.id.fragment_test_tv)
 
-    fun initView(view:View){
-        pager_news.adapter
+        val bundle = arguments
+        if (bundle != null) {
+            val name = bundle.getString("name")
+            tv.text = name
+        }
     }
 
     companion object {
 
-        fun newInstance(name: String): NewsFragment {
+        fun newInstance(name: String): TestFragment {
             val args = Bundle()
             args.putString("name", name)
-            val fragment = NewsFragment()
+            val fragment = TestFragment()
             fragment.arguments = args
             return fragment
         }

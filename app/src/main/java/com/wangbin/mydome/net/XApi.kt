@@ -38,7 +38,7 @@ class XApi {
                 .readTimeout(5, TimeUnit.SECONDS)
                 .connectTimeout(5, TimeUnit.SECONDS)
                 .addInterceptor(UrlInterceptor())
-//                .addInterceptor(LogInterceptor())
+                .addInterceptor(LogInterceptor())
                 .build()
     }
 

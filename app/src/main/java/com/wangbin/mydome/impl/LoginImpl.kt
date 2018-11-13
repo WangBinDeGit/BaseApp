@@ -1,9 +1,10 @@
 package com.wangbin.mydome.impl
 
-import com.wangbin.mydome.bean.ResultModel
+import com.wangbin.mydome.bean.BaseEntity
+import com.wangbin.mydome.bean.UserBean
 
 interface LoginImpl {
-    fun loginSuccess(loginModel: ResultModel)
-    fun loginFail(loginModel: ResultModel)
+    fun loginSuccess(loginModel: BaseEntity<UserBean>)
+    fun loginFail(loginModel: BaseEntity<UserBean>)
     fun toastMsg(toastmsg: String)
 }

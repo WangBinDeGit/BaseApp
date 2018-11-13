@@ -3,9 +3,9 @@ package com.wangbin.mydome.net
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.JsonParser
+import com.wangbin.mydome.tools.DUtils
 import com.wangbin.mydome.tools.NetworkAvailable
 import com.wangbin.mydome.tools.ToastUtils
-import com.wangbin.mydome.tools.DUtils
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import org.json.JSONObject
@@ -34,11 +34,11 @@ abstract class BaseObserve<T>(context: Context, isShowDialog: Boolean) : Observe
 
     override fun onNext(t: T) {
         val jsonElement = JsonParser().parse(Gson().toJson(t))
-        if (jsonElement.isJsonArray) {//数组
+        if (jsonElement.isJsonArray) {//数组或对象
             onSuccess(t)
         } else {
             val jsonObject = jsonElement.asJsonObject
-            if (jsonObject.has("statusCode") && JSONObject(Gson().toJson(t)).getInt("statusCode") == 0) {//数据返回失败
+            if (jsonObject.has("statusCode") && JSONObject(Gson().toJson(t)).getInt("statusCode") != 200) {//数据返回失败
                 onFail(t)
             } else
                 onSuccess(t)
@@ -46,7 +46,8 @@ abstract class BaseObserve<T>(context: Context, isShowDialog: Boolean) : Observe
     }
 
     override fun onError(e: Throwable) {
-        ToastUtils.showShortToast(context, e.message.toString())
+        if (e.message.toString().contains("Failed to connect to")) ToastUtils.showShortToast(context, "服务器错误,请重试!")
+        else ToastUtils.showShortToast(context, e.message.toString())
         if (isShowDialog)
             DUtils.dismiss()
     }

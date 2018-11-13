@@ -1,7 +1,7 @@
 package com.wangbin.mydome.net
 
-import com.wangbin.mydome.bean.LoginModel
-import com.wangbin.mydome.bean.ResultModel
+import com.wangbin.mydome.bean.BaseEntity
+import com.wangbin.mydome.bean.UserBean
 import io.reactivex.Observable
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -17,15 +17,15 @@ interface ApiService {
     @POST("login/loginByName")
     @FormUrlEncoded
     fun login(@Field("userName") userName: String,
-              @Field("passWord") passWord: String): Observable<ResultModel>
+              @Field("passWord") passWord: String): Observable<BaseEntity<UserBean>>
 
     //首页
     @POST("v1/index")
-    fun index(): Observable<LoginModel>
+    fun index(): Observable<BaseEntity<UserBean>>
 
     //公告
     @POST("v1/index/notice")
-    fun notice(@Query("page") page: Int): Observable<LoginModel>
+    fun notice(@Query("page") page: Int): Observable<BaseEntity<UserBean>>
 
     /***房源搜索
      * 小区名字	community_name
@@ -41,6 +41,6 @@ interface ApiService {
                               @Field("status") status: String,
                               @Field("start_date") start_date: String,
                               @Field("end_date") end_date: String,
-                              @Query("page") page: Int): Observable<LoginModel>
+                              @Query("page") page: Int): Observable<BaseEntity<UserBean>>
 
 }

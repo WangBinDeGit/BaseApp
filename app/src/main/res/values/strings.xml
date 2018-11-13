@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">今日头条</string>
-    <string name="company">海誉集团经纪有限公司</string>
+    <string name="app_name">标准作业管理系统</string>
+    <string name="company">JXD有限公司</string>
     <string name="saveuserpass">记住密码</string>
     <string name="isoffline">离线</string>
     <string name="logintitle">登  录</string>
-    <string name="logintext1">今日头条</string>
+    <string name="logintext1">标准作业管理系统</string>
     <string name="logintext2">欢迎登录</string>
     <string name="logindefault1">请输入您的账号</string>
     <string name="logindefault2">请输入您的密码</string>

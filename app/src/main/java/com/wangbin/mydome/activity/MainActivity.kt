@@ -14,14 +14,12 @@ import com.wangbin.mydome.adapter.SearchAdapter
 import com.wangbin.mydome.adapter.ViewPagerAdapter
 import com.wangbin.mydome.base.BaseActivity
 import com.wangbin.mydome.bean.SearchBean
-import com.wangbin.mydome.fragment.NewsFragment
+import com.wangbin.mydome.fragment.IndexFragment
 import com.wangbin.mydome.fragment.TestFragment
 import com.wangbin.mydome.helper.BottomNavigationViewHelper
 import com.wangbin.mydome.net.UpdateAppHttpUtil
-import com.wangbin.mydome.net.Url
 import com.wangbin.mydome.net.Url.Companion.url
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.nav_header_main.*
 import java.util.*
 
 
@@ -36,7 +34,7 @@ class MainActivity : BaseActivity() {
     private var num = 1
     private val mDatas = ArrayList<SearchBean>()
     private var titles: Array<String>? = null
-    private var imgSearch:ImageView ?=null
+    private var imgSearch: ImageView? = null
 
     override fun intiLayout(): Int {
         return R.layout.activity_main
@@ -95,8 +93,8 @@ class MainActivity : BaseActivity() {
         viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
         viewPager!!.adapter = viewPagerAdapter
         val list = ArrayList<Fragment>()
-        list.add(NewsFragment.newInstance(titles!![0]))
-        list.add(NewsFragment.newInstance(titles!![1]))
+        list.add(IndexFragment.newInstance(titles!![0]))
+        list.add(TestFragment.newInstance(titles!![1]))
         list.add(TestFragment.newInstance(titles!![2]))
         list.add(TestFragment.newInstance(titles!![3]))
         viewPagerAdapter!!.setList(list)
@@ -108,7 +106,7 @@ class MainActivity : BaseActivity() {
         rec_search!!.layoutManager = LinearLayoutManager(this@MainActivity)
         searchAdapter = SearchAdapter(this@MainActivity, mDatas)
         rec_search!!.adapter = searchAdapter
-        updateApp(url.BASE_URL+url.UPDATE, UpdateAppHttpUtil()).update()
+        updateApp(url.BASE_URL + url.UPDATE, UpdateAppHttpUtil()).update()
     }
 
     override fun setListener() {

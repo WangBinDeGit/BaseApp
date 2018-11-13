@@ -3,7 +3,7 @@ package com.wangbin.mydome.tools
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import com.wangbin.mydome.Constant
-import com.wangbin.mydome.bean.LoginModel
+import com.wangbin.mydome.bean.UserBean
 
 /**
  * Created by WangBin
@@ -101,18 +101,12 @@ object PreferencesUtils {
         return settings.edit().clear().commit()
     }
 
-    fun saveUser(context: Context, loginModel: LoginModel) {
-        putInt(context, Constant.constant.USER_NO, loginModel.user_no)
-        putString(context, Constant.constant.REAL_NAME, loginModel.realname!!)
-        putInt(context, Constant.constant.SEX, loginModel.sex)
-        putString(context, Constant.constant.AREA_NAME, loginModel.area_name!!)
-        putString(context, Constant.constant.STORE_NAME, loginModel.store_name!!)
-        putString(context, Constant.constant.ROLE_NAME, loginModel.role_name!!)
-        putString(context, Constant.constant.TEL, loginModel.tel!!)
-        putString(context, Constant.constant.PHOTO, loginModel.photo!!)
-        putString(context, Constant.constant.CDN, loginModel.cdn!!)
-        putString(context, Constant.constant.BASE_URL, loginModel.domain!!)
-        putString(context, Constant.constant.ACCESS_TOKEN, loginModel.access_token!!)
+    fun saveUser(context: Context, userBean: UserBean) {
+        putString(context, Constant.constant.REAL_NAME, userBean.userName)
+        putString(context, Constant.constant.SEX, userBean.userSex)
+//        putString(context, Constant.constant.AREA_NAME, loginModel.userAddress)
+//        putString(context, Constant.constant.TEL, loginModel.userPhone)
+//        putString(context, Constant.constant.PHOTO, loginModel.userPhoto)
     }
 
 }
