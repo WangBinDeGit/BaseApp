@@ -46,7 +46,7 @@ class LoginActivity : BaseActivity(), LoginImpl {
     override fun widgetClick(view: View) {
         when (view.id) {
             R.id.tv_login_submit -> loginPersenter!!.login(getText(et_login_user), getText(et_login_password), cb_remember.isChecked)
-            R.id.tv_forget -> startActivity(MainActivity::class.java)
+            R.id.tv_forget -> startActivity(TestActivity::class.java)
         }
     }
 

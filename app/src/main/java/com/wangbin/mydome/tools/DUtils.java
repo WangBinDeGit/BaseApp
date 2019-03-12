@@ -11,7 +11,7 @@ import com.wangbin.mydome.viewbase.MyDialog;
 import com.wangbin.mydome.viewbase.Sprite;
 
 /**
- * Created by wangbin on 2016/4/1.
+ * Created by WangBin on 2016/4/1.
  * 加载转圈
  */
 public class DUtils {

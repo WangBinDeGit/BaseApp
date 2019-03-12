@@ -6,5 +6,5 @@ import com.wangbin.mydome.bean.UserBean
 interface LoginImpl {
     fun loginSuccess(loginModel: BaseEntity<UserBean>)
     fun loginFail(loginModel: BaseEntity<UserBean>)
-    fun toastMsg(toastmsg: String)
+    fun toastMsg(toastMsg: String)
 }

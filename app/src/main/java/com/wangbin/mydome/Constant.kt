@@ -18,6 +18,7 @@ class Constant {
 
     var KEY = "e58824997616e958"
     var IV = "9f99a91e98f20393"
+    var BuglyID = "9237bb9443"
 
 
     //--------------------Handler 通知code -----------------

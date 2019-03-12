@@ -13,18 +13,25 @@ import retrofit2.http.Query
  */
 interface ApiService {
 
+    companion object {
+        private const val LOGINURL = "login/loginByName"
+        private const val INDEXURL = "v1/index"
+        private const val NOTICEURL = "v1/index/notice"
+        private const val HOUSEURL = "v1/house"
+    }
+
     //登录
-    @POST("login/loginByName")
+    @POST(LOGINURL)
     @FormUrlEncoded
     fun login(@Field("userName") userName: String,
               @Field("passWord") passWord: String): Observable<BaseEntity<UserBean>>
 
     //首页
-    @POST("v1/index")
+    @POST(INDEXURL)
     fun index(): Observable<BaseEntity<UserBean>>
 
     //公告
-    @POST("v1/index/notice")
+    @POST(NOTICEURL)
     fun notice(@Query("page") page: Int): Observable<BaseEntity<UserBean>>
 
     /***房源搜索
@@ -34,7 +41,7 @@ interface ApiService {
      * 开始时间	start_date
      * 结束时间	end_date
      */
-    @POST("v1/house")
+    @POST(HOUSEURL)
     @FormUrlEncoded
     fun housingResourceSearch(@Field("community_name") community_name: String,
                               @Field("house_no") house_no: String,

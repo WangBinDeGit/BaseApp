@@ -1,7 +1,7 @@
 package com.wangbin.mydome.net
 
+import com.tencent.bugly.beta.tinker.TinkerManager.getApplication
 import com.wangbin.mydome.Constant.Companion.constant
-import com.wangbin.mydome.MyApplication.Companion.instance
 import com.wangbin.mydome.net.Url.Companion.url
 import com.wangbin.mydome.tools.CreateMD5
 import com.wangbin.mydome.tools.PreferencesUtils
@@ -22,9 +22,9 @@ class UrlInterceptor : Interceptor {
 
         } else {
             token = if (request.url().encodedPath().contains(url.LOGIN)) {//登录时的token
-                PreferencesUtils.getString(instance.applicationContext, constant.ACCESS_TOKEN_LOGIN)!!
+                PreferencesUtils.getString(getApplication(), constant.ACCESS_TOKEN_LOGIN)!!
             } else {
-                PreferencesUtils.getString(instance.applicationContext, constant.ACCESS_TOKEN)!!
+                PreferencesUtils.getString(getApplication(), constant.ACCESS_TOKEN)!!
             }
             val time = Date().time.toString()
             val sign = CreateMD5().getMd5(token + time + constant.KEY + constant.IV)

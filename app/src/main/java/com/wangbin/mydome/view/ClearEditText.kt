@@ -65,7 +65,7 @@ class ClearEditText @JvmOverloads constructor(context: Context, attrs: Attribute
      */
     override fun onFocusChange(v: View, hasFocus: Boolean) {
         if (hasFocus) {
-            setClearIconVisible(text.length > 0)
+            setClearIconVisible(text!!.isNotEmpty())
         } else {
             setClearIconVisible(false)
         }
@@ -76,7 +76,7 @@ class ClearEditText @JvmOverloads constructor(context: Context, attrs: Attribute
      * 设置清除图标的显示与隐藏，调用setCompoundDrawables为EditText绘制上去
      * @param visible
      */
-    protected fun setClearIconVisible(visible: Boolean) {
+    private fun setClearIconVisible(visible: Boolean) {
         val right = if (visible) mClearDrawable else null
         setCompoundDrawables(compoundDrawables[0],
                 compoundDrawables[1], right, compoundDrawables[3])

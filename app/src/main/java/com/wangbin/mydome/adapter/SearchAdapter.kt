@@ -11,7 +11,7 @@ import com.wangbin.mydome.R
 import com.wangbin.mydome.bean.SearchBean
 
 /**
- * Created by  wangbin.
+ * Created by WangBin.
  * on 2018/7/17
  */
 

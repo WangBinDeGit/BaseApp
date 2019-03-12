@@ -20,8 +20,8 @@ public class MyDialog extends Dialog {
     }
     /**
      * 自定义布局的构造方法
-     * @param context
-     * @param resLayout
+     * @param context context
+     * @param resLayout resLayout
      */
     public MyDialog(Context context, int resLayout){
         super(context);
@@ -32,9 +32,9 @@ public class MyDialog extends Dialog {
     }
     /**
      * 自定义主题及布局的构造方法
-     * @param context
-     * @param theme
-     * @param resLayout
+     * @param context context
+     * @param theme theme
+     * @param resLayout resLayout
      */
     public MyDialog(Context context, int theme, int resLayout){
         super(context, theme);

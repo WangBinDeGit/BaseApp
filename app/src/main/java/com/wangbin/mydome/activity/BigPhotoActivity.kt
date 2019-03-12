@@ -59,7 +59,7 @@ class BigPhotoActivity : BaseActivity() {
     }
 
     override fun setListener() {
-        finishthis(this, img_head_left)
+        finishThis(this, img_head_left)
     }
 
     override fun widgetClick(view: View) {

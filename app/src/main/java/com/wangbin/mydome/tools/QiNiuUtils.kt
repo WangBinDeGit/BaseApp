@@ -4,7 +4,6 @@ import android.os.Handler
 import android.os.Message
 import android.util.Log
 import com.wangbin.mydome.Constant.Companion.constant
-import com.wangbin.mydome.MyApplication
 import com.qiniu.android.http.ResponseInfo
 import com.qiniu.android.storage.UpCompletionHandler
 import com.qiniu.android.storage.UpProgressHandler
@@ -95,7 +94,7 @@ object QiNiuUtils {
     }
 
     /**
-     * 这个签名方法找了半天 一个个对出来的、、、、程序猿辛苦啊、、、 使用 HMAC-SHA1 签名方法对对encryptText进行签名
+     * 使用 HMAC-SHA1 签名方法对对encryptText进行签名
      *
      * @param encryptText 被签名的字符串
      * @param encryptKey  密钥

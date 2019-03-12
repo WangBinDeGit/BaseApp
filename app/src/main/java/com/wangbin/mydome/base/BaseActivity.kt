@@ -5,7 +5,10 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -18,14 +21,16 @@ import android.widget.TextView
 import android.widget.Toast
 import com.jakewharton.rxbinding2.view.RxView
 import com.wangbin.mydome.interfaces.IViewSpecification
+import com.wangbin.mydome.interfaces.PermissionListener
 import com.wangbin.mydome.tools.AppActivityStack
 import com.wangbin.mydome.tools.LoadingDialog
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
- * Created by  wangbin.
+ * Created by WangBin.
  * on 2018/8/2
  * 继承的BaseActivity
  */
@@ -40,6 +45,8 @@ abstract class BaseActivity : AppCompatActivity(), IViewSpecification, View.OnCl
     private var alertDialog: AlertDialog.Builder? = null
     /***获取TAG的activity名称 */
     protected val TAG = this.javaClass.simpleName
+    /***权限监听 */
+    private lateinit var mPermissionListener: PermissionListener
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -169,11 +176,11 @@ abstract class BaseActivity : AppCompatActivity(), IViewSpecification, View.OnCl
         startActivityForResult(intent, requestCode)
     }
 
-    fun finishthis(context: Activity, view: View) {
+    fun finishThis(context: Activity, view: View) {
         view.visibility = View.VISIBLE
-        view.setOnClickListener(View.OnClickListener {
+        view.setOnClickListener {
             context.finish()
-        })
+        }
     }
 
     /**
@@ -232,6 +239,46 @@ abstract class BaseActivity : AppCompatActivity(), IViewSpecification, View.OnCl
         actv.requestFocus()
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(actv, 0)
+    }
+
+    /**
+     * 申请运行时权限
+     */
+    fun requestRuntimePermission(permissions: Array<String>, permissionListener: PermissionListener) {
+        mPermissionListener = permissionListener
+        val permissionList = ArrayList<String>()
+        for (permission in permissions) {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                permissionList.add(permission)
+            }
+        }
+
+        if (!permissionList.isEmpty()) {
+            ActivityCompat.requestPermissions(this, permissionList.toTypedArray(), 1)
+        } else {
+            permissionListener.onGranted()
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            1 -> if (grantResults.isNotEmpty()) {
+                val deniedPermissions = ArrayList<String>()
+                for (i in grantResults.indices) {
+                    val grantResult = grantResults[i]
+                    val permission = permissions[i]
+                    if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                        deniedPermissions.add(permission)
+                    }
+                }
+                if (deniedPermissions.isEmpty()) {
+                    mPermissionListener.onGranted()
+                } else {
+                    mPermissionListener.onDenied(deniedPermissions)
+                }
+            }
+        }
     }
 
     /**

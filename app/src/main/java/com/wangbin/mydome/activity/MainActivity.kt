@@ -8,8 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
-import com.vector.update_app_kotlin.updateApp
-import com.wangbin.mydome.R
+import com.vector.update_app.UpdateAppManager
 import com.wangbin.mydome.adapter.SearchAdapter
 import com.wangbin.mydome.adapter.ViewPagerAdapter
 import com.wangbin.mydome.base.BaseActivity
@@ -37,7 +36,7 @@ class MainActivity : BaseActivity() {
     private var imgSearch: ImageView? = null
 
     override fun intiLayout(): Int {
-        return R.layout.activity_main
+        return com.wangbin.mydome.R.layout.activity_main
     }
 
     override fun widgetClick(view: View) {
@@ -46,19 +45,19 @@ class MainActivity : BaseActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         menuItem = item
         when (item.itemId) {
-            R.id.navigation_home -> {
+            com.wangbin.mydome.R.id.navigation_home -> {
                 viewPager!!.currentItem = 0
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_dashboard -> {
+            com.wangbin.mydome.R.id.navigation_dashboard -> {
                 viewPager!!.currentItem = 1
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_notifications -> {
+            com.wangbin.mydome.R.id.navigation_notifications -> {
                 viewPager!!.currentItem = 2
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_person -> {
+            com.wangbin.mydome.R.id.navigation_person -> {
                 viewPager!!.currentItem = 3
                 return@OnNavigationItemSelectedListener true
             }
@@ -67,8 +66,8 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initView() {
-        titles = arrayOf(resources.getString(R.string.title1), resources.getString(R.string.title2),
-                resources.getString(R.string.title3), resources.getString(R.string.title3))
+        titles = arrayOf(resources.getString(com.wangbin.mydome.R.string.title1), resources.getString(com.wangbin.mydome.R.string.title2),
+                resources.getString(com.wangbin.mydome.R.string.title3), resources.getString(com.wangbin.mydome.R.string.title3))
         bottomNavigationView!!.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView!!)
         viewPager!!.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -100,13 +99,21 @@ class MainActivity : BaseActivity() {
         viewPagerAdapter!!.setList(list)
 
         val headerView = nav_view!!.getHeaderView(0)
-        val rec_search = headerView.findViewById<RecyclerView>(R.id.rec_search)
-        imgSearch = headerView.findViewById<ImageView>(R.id.img_search)
+        val recSearch = headerView.findViewById<RecyclerView>(com.wangbin.mydome.R.id.rec_search)
+        imgSearch = headerView.findViewById(com.wangbin.mydome.R.id.img_search)
 
-        rec_search!!.layoutManager = LinearLayoutManager(this@MainActivity)
+        recSearch!!.layoutManager = LinearLayoutManager(this@MainActivity)
         searchAdapter = SearchAdapter(this@MainActivity, mDatas)
-        rec_search!!.adapter = searchAdapter
-        updateApp(url.BASE_URL + url.UPDATE, UpdateAppHttpUtil()).update()
+        recSearch.adapter = searchAdapter
+        UpdateAppManager.Builder()
+                //当前 Activity
+                .setActivity(this)
+                //更新地址
+                .setUpdateUrl(url.BASE_URL + url.UPDATE)
+                //实现 httpManager 接口的对象
+                .setHttpManager(UpdateAppHttpUtil())
+                .build()
+                .update()
     }
 
     override fun setListener() {

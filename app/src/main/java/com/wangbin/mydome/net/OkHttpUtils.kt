@@ -7,8 +7,8 @@ import android.os.Message
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
-import com.wangbin.mydome.tools.HeaderUtils
 import com.wangbin.mydome.Constant
+import com.wangbin.mydome.tools.HeaderUtils
 import okhttp3.*
 import java.io.IOException
 import java.util.concurrent.TimeUnit
@@ -24,7 +24,7 @@ class OkHttpUtils {
     }
 
     companion object {
-        val instance: OkHttpUtils by lazy { Holder.INSTANCE }
+        val okhttp: OkHttpUtils by lazy { Holder.INSTANCE }
     }
 
 

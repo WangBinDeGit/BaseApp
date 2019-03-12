@@ -33,15 +33,14 @@ internal class NewsAdapter(private val mContext: Context) : RecyclerView.Adapter
 
     // 创建视图
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsAdapter.ViewHolder {
-        if (viewType == ITEM_TYPE_HEADER) {
-            return ViewHolder(mHeaderView!!)
-        } else if (viewType == ITEM_TYPE_EMPTY) {
-            return ViewHolder(mEmptyView!!)
-        } else if (viewType == ITEM_TYPE_FOOTER) {
-            return ViewHolder(mFooterView!!)
-        } else {
-            val v = LayoutInflater.from(mContext).inflate(R.layout.layout_recyclerview_item_view, parent, false)
-            return ViewHolder(v)
+        return when (viewType) {
+            ITEM_TYPE_HEADER -> ViewHolder(mHeaderView!!)
+            ITEM_TYPE_EMPTY -> ViewHolder(mEmptyView!!)
+            ITEM_TYPE_FOOTER -> ViewHolder(mFooterView!!)
+            else -> {
+                val v = LayoutInflater.from(mContext).inflate(R.layout.layout_recyclerview_item_view, parent, false)
+                ViewHolder(v)
+            }
         }
     }
 
