@@ -12,19 +12,28 @@ import android.view.WindowManager;
 
 import java.lang.reflect.Method;
 
-
 /**
- * 获得屏幕相关的辅助类
+ * @ClassName ScreenUtils
+ * @Description 获得屏幕相关的辅助类
+ * @Author WangBin
+ * @Date 2019/3/20 17:59
  */
 public class ScreenUtils {
+
     private ScreenUtils() {
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 
-
+    /**
+     * 获取屏幕像素密度
+     *
+     * @param context context
+     * @return int
+     */
     public static int getScreenDensityDpi(Context context) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics dm = new DisplayMetrics();
+        assert wm != null;
         wm.getDefaultDisplay().getMetrics(dm);
         return dm.densityDpi;
     }
@@ -32,8 +41,8 @@ public class ScreenUtils {
     /**
      * 获得屏幕高度
      *
-     * @param context
-     * @return
+     * @param context context
+     * @return int
      */
     public static int getScreenWidth(Context context) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -45,8 +54,8 @@ public class ScreenUtils {
     /**
      * 获得屏幕高度（不包含虚拟导航栏高度）
      *
-     * @param context
-     * @return
+     * @param context context
+     * @return int
      */
     public static int getScreenHeight(Context context) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -57,12 +66,13 @@ public class ScreenUtils {
 
     /**
      * 获取实际屏幕高度（包括虚拟导航栏+状态栏高度）
-     * @param context
-     * @return
+     *
+     * @param activity Activity
+     * @return int
      */
-    public static int getTotalScreenHeight(Activity context) {
+    public static int getTotalScreenHeight(Activity activity) {
         int dpi = 0;
-        Display display = context.getWindowManager().getDefaultDisplay();
+        Display display = activity.getWindowManager().getDefaultDisplay();
         DisplayMetrics dm = new DisplayMetrics();
         Class c;
         try {
@@ -79,8 +89,8 @@ public class ScreenUtils {
     /**
      * 获得状态栏的高度
      *
-     * @param context
-     * @return
+     * @param context context
+     * @return int
      */
     public static int getStatusHeight(Context context) {
 
@@ -100,8 +110,8 @@ public class ScreenUtils {
     /**
      * 获取当前屏幕截图，包含状态栏
      *
-     * @param activity
-     * @return
+     * @param activity activity
+     * @return Bitmap
      */
     public static Bitmap snapShotWithStatusBar(Activity activity) {
         View view = activity.getWindow().getDecorView();
@@ -120,8 +130,8 @@ public class ScreenUtils {
     /**
      * 获取当前屏幕截图，不包含状态栏
      *
-     * @param activity
-     * @return
+     * @param activity Activity
+     * @return Bitmap
      */
     public static Bitmap snapShotWithoutStatusBar(Activity activity) {
         View view = activity.getWindow().getDecorView();
@@ -142,8 +152,9 @@ public class ScreenUtils {
     }
 
 
-
     /**
+     * 让状态栏隐藏
+     *
      * @param view 当Android版本小于4.4时，去掉状态栏view
      */
     public static void setStatusBarHide(View view) {
@@ -151,6 +162,5 @@ public class ScreenUtils {
             view.setVisibility(View.GONE);
         }
     }
-
 
 }

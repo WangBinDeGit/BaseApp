@@ -3,6 +3,7 @@ package com.wangbin.mydome.tools;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,17 +14,17 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by lenovo on 2018/3/28.
- * LogUtil
+ * @ClassName LogUtil
+ * @Description 打印日志类
+ * @Author WangBin
+ * @Date 2019/3/20 17:59
  */
-
 public class LogUtil {
     private static Boolean MYLOG_SWITCH = true; // 日志文件总开关
     private static Boolean MYLOG_WRITE_TO_FILE = true;// 日志写入文件开关
     private static char MYLOG_TYPE = 'v';// 输入日志类型，w代表只输出告警信息等，v代表输出所有信息
-    @SuppressLint("SdCardPath")
     public static String MYLOG_PATH_SDCARD_DIR;// 日志文件在sdcard中的路径
-    private static int SDCARD_LOG_FILE_SAVE_DAYS = 1;// sd卡中日志文件的最多保存天数
+    private static int SDCARD_LOG_FILE_SAVE_DAYS = 10;// sd卡中日志文件的最多保存天数
     private static String MYLOGFILEName = "Log.txt";// 本类输出的日志文件名称
     @SuppressLint("SimpleDateFormat")
     private static SimpleDateFormat myLogSdf = new SimpleDateFormat("yyyy-MM-dd HH：mm：ss");// 日志的输出格式
@@ -74,40 +75,37 @@ public class LogUtil {
     /**
      * 根据tag, msg和等级，输出日志
      *
-     * @param tag
-     * @param msg
-     * @param level
-     * @return void
-     * @since v 1.0
+     * @param tag       前面的日志名
+     * @param msg       日志输出信息
+     * @param level     输出等级
      */
     private static void log(String tag, String msg, char level) {
         if (MYLOG_SWITCH) {
             if ('e' == level && ('e' == MYLOG_TYPE || 'v' == MYLOG_TYPE)) { // 输出错误信息
-                //Log.e(tag, msg);
+                Log.e(tag, msg);
             } else if ('w' == level && ('w' == MYLOG_TYPE || 'v' == MYLOG_TYPE)) {
-                //Log.w(tag, msg);
+                Log.w(tag, msg);
             } else if ('d' == level && ('d' == MYLOG_TYPE || 'v' == MYLOG_TYPE)) {
-                // Log.d(tag, msg);
+                 Log.d(tag, msg);
             } else if ('i' == level && ('d' == MYLOG_TYPE || 'v' == MYLOG_TYPE)) {
-//                Log.i(tag, msg);
+                Log.i(tag, msg);
             } else {
-                //Log.v(tag, msg);
+                Log.v(tag, msg);
             }
-            if (MYLOG_WRITE_TO_FILE)
+            if (MYLOG_WRITE_TO_FILE) {
                 writeLogtoFile(String.valueOf(level), tag, msg);
+            }
         }
     }
 
     /**
      * 打开日志文件并写入日志
-     *
-     * @return
      **/
-    private static void writeLogtoFile(String mylogtype, String tag, String text) {// 新建或打开日志文件
+    private static void writeLogtoFile(String mylogtype, String tag, String text) {
+        // 新建或打开日志文件
         Date nowtime = new Date();
         String needWriteFiel = logfile.format(nowtime);
-        String needWriteMessage = myLogSdf.format(nowtime) + "    " + mylogtype
-                + "    " + tag + "    " + text;
+        String needWriteMessage = myLogSdf.format(nowtime) + "    " + mylogtype + "    " + tag + "    " + text;
 //        File dirPath = Environment.getExternalStorageDirectory();
         FileUtil.INSTANCE.isFolderExists(LogUtil.MYLOG_PATH_SDCARD_DIR);
         File file = new File(MYLOG_PATH_SDCARD_DIR, needWriteFiel + MYLOGFILEName);// MYLOG_PATH_SDCARD_DIR
@@ -142,8 +140,7 @@ public class LogUtil {
         Date nowtime = new Date();
         Calendar now = Calendar.getInstance();
         now.setTime(nowtime);
-        now.set(Calendar.DATE, now.get(Calendar.DATE)
-                - SDCARD_LOG_FILE_SAVE_DAYS);
+        now.set(Calendar.DATE, now.get(Calendar.DATE) - SDCARD_LOG_FILE_SAVE_DAYS);
         return now.getTime();
     }
 }

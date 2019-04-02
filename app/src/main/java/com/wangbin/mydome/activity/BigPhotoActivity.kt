@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
@@ -12,7 +13,6 @@ import com.bumptech.glide.Glide
 import com.github.chrisbanes.photoview.PhotoView
 import com.wangbin.mydome.R
 import com.wangbin.mydome.base.BaseActivity
-import com.wangbin.mydome.tools.Logger
 import kotlinx.android.synthetic.main.activity_big_photo.*
 import kotlinx.android.synthetic.main.headtoolbar.*
 import java.util.*
@@ -49,7 +49,7 @@ class BigPhotoActivity : BaseActivity() {
         hvp_bigphoto.currentItem = Integer.valueOf(position)!!
         if (datastype != null && datastype!!.size > 0) {
             for (i in datastype!!.indices) {
-                Logger.d(TAG, datastype!![i])
+                Log.d(TAG, datastype!![i])
             }
             tv_head_title.text = datastype!!.get(index = Integer.valueOf(position)!!)
         } else {

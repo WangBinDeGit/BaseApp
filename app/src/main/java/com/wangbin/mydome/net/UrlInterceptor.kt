@@ -3,8 +3,8 @@ package com.wangbin.mydome.net
 import com.tencent.bugly.beta.tinker.TinkerManager.getApplication
 import com.wangbin.mydome.Constant.Companion.constant
 import com.wangbin.mydome.net.Url.Companion.url
-import com.wangbin.mydome.tools.CreateMD5
 import com.wangbin.mydome.tools.PreferencesUtils
+import com.wangbin.mydome.tools.encryption.CreateMD5
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.util.*
@@ -27,7 +27,7 @@ class UrlInterceptor : Interceptor {
                 PreferencesUtils.getString(getApplication(), constant.ACCESS_TOKEN)!!
             }
             val time = Date().time.toString()
-            val sign = CreateMD5().getMd5(token + time + constant.KEY + constant.IV)
+            val sign = CreateMD5.getMd5(token + time + constant.KEY + constant.IV)
             request = request.newBuilder()
                     .addHeader("access-token", token)
                     .addHeader("timestamp", time)

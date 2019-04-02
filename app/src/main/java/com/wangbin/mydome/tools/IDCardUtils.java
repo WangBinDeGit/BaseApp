@@ -9,8 +9,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by wangbin
- * on 2017/8/8.
+ * @ClassName IDCardUtils
+ * @Description 身份证验证
+ * @Author WangBin
+ * @Date 2019/3/20 17:59
  */
 public class IDCardUtils {
 

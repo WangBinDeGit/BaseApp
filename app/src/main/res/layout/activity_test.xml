@@ -3,10 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".activity.TestActivity">
 
     <include layout="@layout/headtoolbar"/>
+
+    <ImageView android:id="@+id/img_circle"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
+    <ImageView android:id="@+id/img_rount"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rcy_test"

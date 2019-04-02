@@ -6,17 +6,22 @@ import java.io.*
 import java.text.DecimalFormat
 
 /**
- * Created by  wangbin.
- * on 2018/8/2
+ * @ClassName FileUtil
+ * @Description 文件工具类
+ * @Author WangBin
+ * @Date 2019/3/20 17:59
  */
-
 object FileUtil {
 
-    val SIZETYPE_B = 1//获取文件大小单位为B的double值
-    val SIZETYPE_KB = 2//获取文件大小单位为KB的double值
-    val SIZETYPE_MB = 3//获取文件大小单位为MB的double值
-    val SIZETYPE_GB = 4//获取文件大小单位为GB的double值
+    private const val SIZETYPE_B = 1//获取文件大小单位为B的double值
+    private const val SIZETYPE_KB = 2//获取文件大小单位为KB的double值
+    private const val SIZETYPE_MB = 3//获取文件大小单位为MB的double值
+    private const val SIZETYPE_GB = 4//获取文件大小单位为GB的double值
 
+    /**
+     * 判断文件是否存在
+     * @param strFolder 文件路径
+     */
     fun isFolderExists(strFolder: String): Boolean {
         val file = File(strFolder)
         return if (!file.exists()) {
@@ -25,13 +30,13 @@ object FileUtil {
     }
 
     /**
-     * 把batmap 转file
+     * 把bitmap 转file
      *
-     * @param bitmap
-     * @param filepath
+     * @param bitmap    传入的bitmap
+     * @param filepath  将要保存图片的路径
      */
     fun saveBitmapFile(bitmap: Bitmap, filepath: String): File {
-        val file = File(filepath)//将要保存图片的路径
+        val file = File(filepath)
         try {
             val bos = BufferedOutputStream(FileOutputStream(file))
             bitmap.compress(Bitmap.CompressFormat.JPEG, 80, bos)
@@ -40,8 +45,31 @@ object FileUtil {
         } catch (e: IOException) {
             e.printStackTrace()
         }
-
         return file
+    }
+
+    /**
+     * 获取文件指定文件的指定单位的大小
+     *
+     * @param filePath 文件路径
+     * @return Long值的大小
+     */
+    private fun getFileSize(filePath: String): Long {
+        val file = File(filePath)
+        val blockSize: Long
+        try {
+            //是否为文件
+            blockSize = if (file.isDirectory) {
+                getFileSizes(file)
+            } else {
+                getFileSize(file)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.e("获取文件大小", "获取失败!")
+            return 0
+        }
+        return blockSize
     }
 
     /**
@@ -51,21 +79,8 @@ object FileUtil {
      * @param sizeType 获取大小的类型1为B、2为KB、3为MB、4为GB
      * @return double值的大小
      */
-    fun getFileOrFilesSize(filePath: String, sizeType: Int): Double {
-        val file = File(filePath)
-        var blockSize: Long = 0
-        try {
-            if (file.isDirectory) {
-                blockSize = getFileSizes(file)
-            } else {
-                blockSize = getFileSize(file)
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            Log.e("获取文件大小", "获取失败!")
-        }
-
-        return FormetFileSize(blockSize, sizeType)
+    fun getFileOrFileSize(filePath: String, sizeType: Int): Double {
+        return formetFileSize(getFileSize(filePath), sizeType)
     }
 
     /**
@@ -75,85 +90,73 @@ object FileUtil {
      * @return 计算好的带B、KB、MB、GB的字符串
      */
     fun getAutoFileOrFilesSize(filePath: String): String {
-        val file = File(filePath)
-        var blockSize: Long = 0
-        try {
-            if (file.isDirectory) {
-                blockSize = getFileSizes(file)
-            } else {
-                blockSize = getFileSize(file)
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            Log.e("获取文件大小", "获取失败!")
-        }
-
-        return FormetFileSize(blockSize)
+        return formetFileSize(getFileSize(filePath))
     }
 
     /**
      * 获取指定文件大小
      *
-     * @param f
-     * @return
-     * @throws Exception
+     * @param file 传入文件
+     * @return Long
      */
-    @Throws(Exception::class)
     private fun getFileSize(file: File): Long {
-        var size: Long = 0
-        if (file.exists()) {
+        try {
+            if (!file.exists()) {
+                file.createNewFile()
+                Log.e("获取文件大小", "文件不存在!")
+                return 0
+            }
             val fis: FileInputStream?
             fis = FileInputStream(file)
-            size = fis.available().toLong()
-        } else {
-            file.createNewFile()
-            Log.e("获取文件大小", "文件不存在!")
+            return fis.available().toLong()
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+            return 0
         }
-        return size
     }
 
     /**
-     * 获取指定文件夹
+     * 获取指定文件夹大小
      *
      * @param f
      * @return
-     * @throws Exception
      */
-    @Throws(Exception::class)
     private fun getFileSizes(f: File): Long {
-        var size: Long = 0
-        val flist = f.listFiles()
-        for (i in flist!!.indices) {
-            if (flist[i].isDirectory) {
-                size = size + getFileSizes(flist[i])
-            } else {
-                size = size + getFileSize(flist[i])
+        return try {
+            var size: Long = 0
+            val fList = f.listFiles()
+            for (i in fList!!.indices) {
+                size = if (fList[i].isDirectory) {
+                    size + getFileSizes(fList[i])
+                } else {
+                    size + getFileSize(fList[i])
+                }
             }
+            size
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+            0
         }
-        return size
     }
 
     /**
      * 转换文件大小
      *
-     * @param fileS
-     * @return
+     * @param fileS     文件的长度
+     * @return String
      */
-    private fun FormetFileSize(fileS: Long): String {
+    private fun formetFileSize(fileS: Long): String {
         val df = DecimalFormat("#.00")
         val fileSizeString: String
         val wrongSize = "0B"
         if (fileS == 0L) {
             return wrongSize
         }
-        if (fileS < 1024) {
-            fileSizeString = df.format(fileS.toDouble()) + "B"
-        } else if (fileS < 1048576) {
-            fileSizeString = df.format(fileS.toDouble() / 1024) + "KB"
-        } else if (fileS < 1073741824) {
-            fileSizeString = df.format(fileS.toDouble() / 1048576) + "MB"
-        } else {
-            fileSizeString = df.format(fileS.toDouble() / 1073741824) + "GB"
+        fileSizeString = when {
+            fileS < 1024 -> df.format(fileS.toDouble()) + "B"
+            fileS < 1048576 -> df.format(fileS.toDouble() / 1024) + "KB"
+            fileS < 1073741824 -> df.format(fileS.toDouble() / 1048576) + "MB"
+            else -> df.format(fileS.toDouble() / 1073741824) + "GB"
         }
         return fileSizeString
     }
@@ -161,11 +164,11 @@ object FileUtil {
     /**
      * 转换文件大小,指定转换的类型
      *
-     * @param fileS
-     * @param sizeType
+     * @param fileS     文件长度
+     * @param sizeType  长度类型
      * @return
      */
-    private fun FormetFileSize(fileS: Long, sizeType: Int): Double {
+    private fun formetFileSize(fileS: Long, sizeType: Int): Double {
         val df = DecimalFormat("#.00")
         var fileSizeLong = 0.0
         when (sizeType) {

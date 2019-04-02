@@ -3,14 +3,13 @@ package com.wangbin.mydome.tools
 import android.os.Handler
 import android.os.Message
 import android.util.Log
-import com.wangbin.mydome.Constant.Companion.constant
 import com.qiniu.android.http.ResponseInfo
 import com.qiniu.android.storage.UpCompletionHandler
 import com.qiniu.android.storage.UpProgressHandler
 import com.qiniu.android.storage.UploadManager
 import com.qiniu.android.storage.UploadOptions
 import com.qiniu.android.utils.UrlSafeBase64
-import com.wangbin.mydome.MyApplication.Companion.instance
+import com.wangbin.mydome.Constant.Companion.constant
 import com.wangbin.mydome.bean.UpdatePictureBean
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -80,7 +79,7 @@ object QiNiuUtils {
                                 }
                                 handler!!.sendMessage(msg)
                             } else {
-                                ToastUtils.showShortToast(instance.applicationContext, "上传失败")
+//                                TODO()上传失败
                             }
                         }
                     }, UploadOptions(null, null, false,

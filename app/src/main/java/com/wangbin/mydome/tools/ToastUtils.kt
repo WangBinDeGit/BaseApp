@@ -1,6 +1,5 @@
 package com.wangbin.mydome.tools
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.Gravity
@@ -13,46 +12,61 @@ import com.wangbin.mydome.Constant.Companion.constant
  *
  * ToastUtils
  */
-@SuppressLint("StaticFieldLeak")
-object ToastUtils {
-    private var toast: Toast? = null
-
+class ToastUtils {
+    private var mToastUtils: ToastUtils? = null
+    private var mToast: Toast? = null
     private var view: View? = null
 
-    @SuppressLint("ShowToast")
+    /**
+     * 单例
+     *
+     * @return AppActivityStack
+     */
+    @Synchronized
+    fun create(): ToastUtils {
+        if (null == mToastUtils) {
+            synchronized(AppActivityStack::class.java) {
+                if (null == mToastUtils) {
+                    mToastUtils = ToastUtils()
+                }
+            }
+        }
+        return mToastUtils!!
+    }
+
     private fun getToast(context: Context) {
-        if (toast == null) {
-            toast = Toast(context)
+        if (mToast == null) {
+            mToast = Toast(context)
         }
         if (view == null) {
             view = Toast.makeText(context, "", Toast.LENGTH_SHORT).view
         }
-        toast!!.view = view
+        mToast!!.view = view
     }
 
     fun showShortToast(context: Context, msg: CharSequence) {
-        showToast(context.getApplicationContext(), msg, Toast.LENGTH_SHORT)
+        showToast(context, msg, Toast.LENGTH_SHORT)
     }
 
     fun showShortToast(context: Context, resId: Int) {
-        showToast(context.getApplicationContext(), resId, Toast.LENGTH_SHORT)
+        showToast(context, resId, Toast.LENGTH_SHORT)
     }
 
     fun showLongToast(context: Context, msg: CharSequence) {
-        showToast(context.getApplicationContext(), msg, Toast.LENGTH_SHORT)
+        showToast(context, msg, Toast.LENGTH_SHORT)
     }
 
     fun showLongToast(context: Context, resId: Int) {
-        showToast(context.getApplicationContext(), resId, Toast.LENGTH_LONG)
+        showToast(context, resId, Toast.LENGTH_LONG)
     }
 
     private fun showToast(context: Context, msg: CharSequence, duration: Int) {
         try {
             getToast(context)
-            toast!!.setText(msg)
-            toast!!.duration = duration
-            toast!!.setGravity(Gravity.CENTER, 0, 0)
-            toast!!.show()
+            mToast!!.setText(msg)
+            mToast!!.duration = duration
+            mToast!!.setGravity(Gravity.CENTER, 0, 0)
+            mToast!!.show()
         } catch (e: Exception) {
             Log.e(constant.APP_NAME, e.message)
         }
@@ -65,20 +79,24 @@ object ToastUtils {
                 return
             }
             getToast(context)
-            toast!!.setText(resId)
-            toast!!.duration = duration
-            toast!!.setGravity(Gravity.CENTER, 0, 0)
-            toast!!.show()
+            mToast!!.setText(resId)
+            mToast!!.duration = duration
+            mToast!!.setGravity(Gravity.CENTER, 0, 0)
+            mToast!!.show()
         } catch (e: Exception) {
             Log.e(constant.APP_NAME, e.message)
         }
-
     }
 
-    fun cancelToast() {
-        if (toast != null) {
-            toast!!.cancel()
+    /**
+     * 取消toast，在activity的destory方法中调用
+     */
+    fun destory() {
+        if (null != mToast) {
+            mToast!!.cancel()
+            mToast = null
         }
+        mToastUtils = null
     }
 
 }

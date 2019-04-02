@@ -6,18 +6,17 @@ import com.google.gson.reflect.TypeToken
 import java.util.*
 
 /**
- * Created by WangBin on 2018/1/12.
- *
- * Json解析类
+ * @ClassName DataFactory
+ * @Description json的解析
+ * @Author WangBin
+ * @Date 2019/3/20 17:59
  */
-
 object DataFactory {
 
     /**
-     * @author WangBin
-     * @param json
-     * @param clazz
-     * @return
+     * @param json      传入字符串
+     * @param clazz     传入转换类
+     * @return 返回对象
      */
     fun getInstanceByJson(clazz: Class<*>, json: String): Any? {
         val obj: Any?
@@ -27,10 +26,9 @@ object DataFactory {
     }
 
     /**
-     * @author WangBin
-     * @param json
-     * @param clazz
-     * @return
+     * @param json      传入字符串
+     * @param clazz     传入转换类
+     * @return 返回对象列表
      */
     fun <T> jsonToList(json: String, clazz: Class<Array<T>>): List<T> {
         val gson = Gson()
@@ -39,9 +37,9 @@ object DataFactory {
     }
 
     /**
-     * @param json
-     * @param clazz
-     * @return
+     * @param json      传入字符串
+     * @param clazz     传入转换类
+     * @return 返回对象列表
      */
     fun <T> jsonToArrayList(json: String, clazz: Class<T>): ArrayList<T> {
         val type = object : TypeToken<ArrayList<JsonObject>>() {

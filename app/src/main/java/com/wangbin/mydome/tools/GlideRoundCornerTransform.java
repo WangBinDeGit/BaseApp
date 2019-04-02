@@ -12,17 +12,26 @@ import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 
 /**
- * Created by wangbin
- * on 2018/8/2.
+ * @ClassName GlideRoundCornerTransform
+ * @Description 给图片设置圆角显示工具类
+ * @Author WangBin
+ * @Date 2019/3/20 17:59
  */
-
 public class GlideRoundCornerTransform extends BitmapTransformation {
     private static float radius = 0f;
 
+    /**
+     * 默认5dp
+     * @param context  传入context
+     */
     public GlideRoundCornerTransform(Context context) {
-        this(context, 4);
+        this(context, 5);
     }
 
+    /**
+     * @param context   传入context
+     * @param dp        传入圆角dp
+     */
     GlideRoundCornerTransform(Context context, int dp) {
         super(context);
         radius = Resources.getSystem().getDisplayMetrics().density * dp;

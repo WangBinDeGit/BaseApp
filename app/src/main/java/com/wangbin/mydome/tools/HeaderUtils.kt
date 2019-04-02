@@ -1,8 +1,10 @@
 package com.wangbin.mydome.tools
 
 /**
- * Created by WangBin
- * on 2018/1/12.
+ * @ClassName HeaderUtils
+ * @Description 后台返回数据获取头数据
+ * @Author WangBin
+ * @Date 2019/3/20 17:59
  */
 object HeaderUtils {
 

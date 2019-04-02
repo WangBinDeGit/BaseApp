@@ -315,6 +315,19 @@ object DateUtils {
     }
 
     /**
+     * 将小于1小时的秒数转换成时间显示格式
+     */
+    fun showTimeCount(time: Long): String {
+        val a = "0"
+        val b = ":"
+        return if (time <= 59) {
+            if (time < 10) a + a + b + a + time.toString() else a + a + b + time.toString()
+        } else {
+            if (time / 60 < 10) a + time / 60 + ":" + (if (time % 60 < 10) a + time % 60 else (time % 60).toString()) else (time / 60).toString() + b + if (time % 60 < 10) a + time % 60 else (time % 60).toString()
+        }
+    }
+
+    /**
      *
      * @param dateTime yyyy-MM-dd HH:mm:ss
      * @return unix 时间
@@ -339,7 +352,7 @@ object DateUtils {
      */
     fun gerUnixTime2String(timestampString: String, formats: String): String {
 
-        if (StringUtils.isBlank(timestampString) || "null" == timestampString) {
+        if (StringUtil.isEmpty(timestampString) || "null" == timestampString) {
             return ""
         }
         val timestamp = java.lang.Long.parseLong(timestampString) * 1000
@@ -701,7 +714,7 @@ object DateUtils {
             if (date == null) {
                 date = Date()// 如果时间为空,则默认为当前时间
             }
-            if (StringUtils.isBlank(format)) {// 默认格式化形式
+            if (StringUtil.isEmpty(format)) {// 默认格式化形式
                 format = "yyyy-MM-dd"
             }
             val df = SimpleDateFormat(format)
@@ -725,10 +738,10 @@ object DateUtils {
              */
     fun format(dateStr: String, format: String): Date? {
         var format = format
-        if (StringUtils.isBlank(dateStr)) {
+        if (StringUtil.isEmpty(dateStr)) {
             return Date()
         }
-        if (StringUtils.isBlank(format)) {
+        if (StringUtil.isEmpty(format)) {
             format = "yyyy-MM-dd"
         }
         var date: Date? = null
@@ -1165,7 +1178,7 @@ object DateUtils {
             throw Exception("参数[日期]不能为空!")
         }
         var strFormat = argFormat
-        if (StringUtils.isBlank(strFormat)) {
+        if (StringUtil.isEmpty(strFormat)) {
             strFormat = Y_M_D
             if (argDateStr.length > 16) {
                 strFormat = Y_M_D_HMS
@@ -1329,7 +1342,8 @@ object DateUtils {
         c.add(Calendar.MONTH, -1)
         return newLongYMDFormat().format(c.time)
     }
-  /***
+
+    /***
      * 获取当前日期的下一月
      */
     fun getNextMonth(): String {
@@ -1368,12 +1382,13 @@ object DateUtils {
     }
 
 
-    fun getFirstOfYear():String{
+    fun getFirstOfYear(): String {
         val c = Calendar.getInstance()
         c.time = Date()
         c.set(Calendar.DAY_OF_YEAR, 1)
         return newLongYMDFormat().format(c.time)
     }
+
     /**
      * 创建一个"yyyy-MM-dd"日期的格式化对象
      * @return "yyyy-MM-dd"日期的格式化对象

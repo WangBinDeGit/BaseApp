@@ -5,9 +5,11 @@ import java.io.File;
 import java.io.InputStreamReader;
 
 /**
+ * @ClassName RootUtil
+ * @Description 判断手机是否root
  * https://stackoverflow.com/questions/1101380/determine-if-running-on-a-rooted-device
- * Created by Simon on 2018/6/26
- * Des :判断手机是否root
+ * @Author WangBin
+ * @Date 2019/3/20 17:59
  */
 public class RootUtil {
 

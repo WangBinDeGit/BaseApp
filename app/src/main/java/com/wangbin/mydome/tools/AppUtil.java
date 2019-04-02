@@ -5,9 +5,10 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 /**
- * Created by wangbin
- * on 2018/8/8.
- * AppUtil
+ * @ClassName AppUtil
+ * @Description App的管理类
+ * @Author WangBin
+ * @Date 2019/3/20 17:59
  */
 public class AppUtil {
 
@@ -31,21 +32,6 @@ public class AppUtil {
     }
 
     /**
-     * 获取应用程序版本名称信息
-     */
-    public static String getVersionName(Context context) {
-        try {
-            PackageManager packageManager = context.getPackageManager();
-            PackageInfo packageInfo = packageManager.getPackageInfo(
-                    context.getPackageName(), 0);
-            return packageInfo.versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    /**
      * 获取app版本号
      */
     public static int getAppVersionCode(Context context) {
@@ -58,5 +44,20 @@ public class AppUtil {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    /**
+     * 获取顶部status bar 高度
+     *
+     * @param context 传入Context
+     * @return int 高度
+     */
+    public static int getStatusBarHeight(Context context) {
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
     }
 }

@@ -6,11 +6,11 @@ import android.media.AudioRecord;
 import android.media.MediaRecorder;
 
 /**
- * Created by lenovo on 2018/4/25.
- * CheckAudioPermission
- * 检查是否有录音权限 在启动界面Create()调用
+ * @ClassName CheckAudioPermission
+ * @Description 检查是否有录音权限 在启动界面Create()调用
+ * @Author WangBin
+ * @Date 2019/3/20 17:59
  */
-
 public class CheckAudioPermission {
     // 音频获取源
     private static int audioSource = MediaRecorder.AudioSource.MIC;

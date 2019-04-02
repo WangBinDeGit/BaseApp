@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 
 import com.wangbin.mydome.R;
 
-
 /**
  * @ClassName RecordActivity
  * @Description TODO

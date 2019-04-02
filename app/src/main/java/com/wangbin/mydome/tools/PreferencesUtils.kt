@@ -6,12 +6,13 @@ import com.wangbin.mydome.Constant
 import com.wangbin.mydome.bean.UserBean
 
 /**
- * Created by WangBin
- * on 2018/4/16.
+ * @ClassName PreferencesUtils
+ * @Description 存储到本地沙盒中的Preferences
+ * @Author WangBin
+ * @Date 2019/3/20 17:59
  */
 object PreferencesUtils {
     var PREFERENCE_NAME = "TrineaAndroidCommon"
-    var LOGIN_NAME = "LoginRemmberName"
 
     fun putString(context: Context, key: String, value: String): Boolean {
         val settings = context.getSharedPreferences(PREFERENCE_NAME, MODE_PRIVATE)
