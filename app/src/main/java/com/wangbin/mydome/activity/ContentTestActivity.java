@@ -58,10 +58,6 @@ public class ContentTestActivity extends Activity {
         RxView.clicks(mtextView_age)
                 .compose(RxJavaUtils.preventDuplicateClicksTransformer(4, TimeUnit.SECONDS))
                 .subscribe(o -> Toast.makeText(ContentTestActivity.this, "点击了年龄", Toast.LENGTH_SHORT).show());
-        RxView.clicks(mtextView_age)
-                .compose(RxJavaUtils.preventDuplicateClicksTransformer(4, TimeUnit.SECONDS))
-                .subscribe(o -> Toast.makeText(ContentTestActivity.this, "点击了年龄", Toast.LENGTH_SHORT).show());
-
     }
 
 }
