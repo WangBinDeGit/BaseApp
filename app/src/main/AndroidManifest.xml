@@ -34,11 +34,11 @@
         </provider>
 
         <activity android:name=".activity.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
 
         <activity-alias
@@ -60,16 +60,18 @@
             android:icon="@mipmap/icon_11"
             android:label="双11"
             android:targetActivity=".activity.LoginActivity">
+
+        </activity-alias>
+
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.BigPhotoActivity" />
+        <activity android:name=".activity.ContentTestActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity-alias>
-
-        <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.BigPhotoActivity" />
-        <activity android:name=".activity.ContentTestActivity" />
+        </activity>
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale" />

@@ -1,5 +1,6 @@
 package com.wangbin.mydome.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.database.Cursor;
@@ -12,10 +13,9 @@ import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.wangbin.mydome.R;
+import com.wangbin.mydome.tools.RxJavaUtils;
 
 import java.util.concurrent.TimeUnit;
-
-import io.reactivex.functions.Consumer;
 
 /**
  * Created by jxd.
@@ -47,15 +47,21 @@ public class ContentTestActivity extends Activity {
         initView();
     }
 
+    @SuppressLint("CheckResult")
     private void initView() {
         RxView.clicks(mTextView_name)
-            .throttleFirst(5, TimeUnit.SECONDS)
-            .subscribe(new Consumer<Object>() {
-                @Override
-                public void accept(Object o) throws Exception {
-                    Toast.makeText( ContentTestActivity.this, "点击", Toast.LENGTH_SHORT).show();
-                }
-            });
+                .compose(RxJavaUtils.preventDuplicateClicksTransformer(5, TimeUnit.SECONDS))
+                .subscribe(o -> Toast.makeText(ContentTestActivity.this, "点击了姓名", Toast.LENGTH_SHORT).show());
+        RxView.clicks(mTextView_address)
+                .compose(RxJavaUtils.preventDuplicateClicksTransformer(2, TimeUnit.SECONDS))
+                .subscribe(o -> Toast.makeText(ContentTestActivity.this, "点击了地址", Toast.LENGTH_SHORT).show());
+        RxView.clicks(mtextView_age)
+                .compose(RxJavaUtils.preventDuplicateClicksTransformer(4, TimeUnit.SECONDS))
+                .subscribe(o -> Toast.makeText(ContentTestActivity.this, "点击了年龄", Toast.LENGTH_SHORT).show());
+        RxView.clicks(mtextView_age)
+                .compose(RxJavaUtils.preventDuplicateClicksTransformer(4, TimeUnit.SECONDS))
+                .subscribe(o -> Toast.makeText(ContentTestActivity.this, "点击了年龄", Toast.LENGTH_SHORT).show());
+
     }
 
 }
